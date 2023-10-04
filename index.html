@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/4.0.0/github-markdown.min.css">
+
+    <title>Simple Layout</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/marked/marked.min.js"></script>
+
+
+</head>
+<body>
+
+<header>
+    <h1>My javascript playground</h1>
+</header>
+
+<nav>
+    <a href="#webworkers">Web Workers</a>
+    <a href="#serviceworkers">Service Workers</a>
+    <a href="#websockets">Web Sockets</a>    
+</nav>
+
+<main>
+    <section id="webworkers">
+        <h2>Testing Web Workers</h2>
+        <p>
+            <input type="button" id="btnChangeColors" value="change colors"> ->
+            <span id="texttochangecolor">This is a simple layout example. You can modify and expand upon this as needed.</span>
+            <hr>
+    
+            <input type="button" id="btnStartCalculation" value="Make Expensive calculation"> 
+            <span id="calculationResult">&nbsp;</span>
+    <br>
+    <br>
+            <span id="calculationResult2">&nbsp;</span>
+    
+            <hr>
+            <h2>Can I send http or ajax requests from web workers?</h2>
+            <p>
+                Yes, you can send HTTP requests from Web Workers. Web Workers have access to the XMLHttpRequest object, so you can use it to send AJAX requests directly from a worker. Additionally, Web Workers also support the Fetch API, which provides a more modern way to make network requests.            
+            </p>
+    
+            <h2>Do I use web workers to access the dom?</h2>
+            <p id="markdownOutput">
+                No, Web Workers do not have access to the DOM. This is by design to ensure that Web Workers run in a thread-safe environment. Since the DOM is not thread-safe, any direct manipulation of the DOM from Web Workers could lead to unpredictable results and potential issues.
+    
+                Here's what you can and cannot do with Web Workers:
+    
+                **Can Do:**
+    
+                1. Run JavaScript in the background, separate from the main execution thread.
+                2. Use XMLHttpRequest (to make AJAX calls).
+                3. Use the Fetch API.
+                4. Access a limited number of global objects and functions, such as `setTimeout`, `setInterval`, and more.
+                5. Use the `postMessage` method to communicate between the main thread and the worker.
+    
+                **Cannot Do:**
+    
+                1. Access the DOM or the `window` object.
+                2. Use some default methods and properties of the global scope.
+                3. Directly manipulate the UI.
+    
+                If you need to update the DOM based on the result of a Web Worker's computation, you should:
+    
+                1. Compute the result in the Web Worker.
+                2. Send the result from the worker to the main thread using `postMessage`.
+                3. In the main thread, listen for the message from the worker and update the DOM accordingly.
+    
+                This separation ensures that computationally intensive tasks can be offloaded to the Web Worker, keeping the main thread (and thus the UI) responsive, while still allowing for updates to the DOM based on the results of the worker's tasks.
+            </p>
+        </p>
+    </section>
+    <section id="sericeworkers">
+            sadsadsa
+    </section>
+</main>
+
+<footer>
+    Copyright © 2023 My Simple Layout
+</footer>
+<script src="js/main.js"></script>
+
+
+</body>
+</html>
