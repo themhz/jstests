@@ -11,9 +11,18 @@
 
 
     <script>
-        // Check if service workers and push messaging are supported
-        
+        // Check if service workers and push messaging are supported        
         if ('serviceWorker' in navigator && 'PushManager' in window) {
+
+            navigator.serviceWorker.addEventListener('message', function(event) {
+                if (event.data && event.data.type === 'PUSH_NOTIFICATION') {
+                    alert(event.data.data);
+                } else if (event.data && event.data.message) {
+                    alert(event.data.message);
+                }
+            });
+
+
             navigator.serviceWorker.register('/sw.js')
             .then(function(swReg) {
                 console.log('Service Worker is registered', swReg);
@@ -67,10 +76,9 @@
             return outputArray;
         }
 
-        navigator.serviceWorker.addEventListener('message', function(event) {
-            debugger;
+      /*  navigator.serviceWorker.addEventListener('message', function(event) {            
             alert(event.data.message);
-        });
+        });*/
 
 
     </script>
